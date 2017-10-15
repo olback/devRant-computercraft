@@ -6,7 +6,7 @@ local showScore = true -- Show the amount of ++ a rant has
 local showComments = true -- Show the amount of comments a rant has
 local showWeeklyMsg = false -- Display the weekly rant topic at the top
  
-local version = "1.1d"
+local version = "1.2r"
 local link = "https://www.devrant.io/api/devrant/rants?app=3&sort=recent&skip=0"
 local headers = {["User-Agent"] = "ComputerCraft devRant Client " .. version}
  
