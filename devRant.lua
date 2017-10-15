@@ -1,11 +1,12 @@
 os.loadAPI("json")
  
-local rantAmount = 2
-local showUsername = true
-local showScore = true
-local showWeeklyMsg = false
+local rantAmount = 2 -- The amount of rants to be displayed
+local showUsername = true -- Show the username above a rant
+local showScore = true -- Show the amount of ++ a rant has
+local showComments = true -- Show the amount of comments a rant has
+local showWeeklyMsg = false -- Display the weekly rant topic at the top
  
-local version = "1.1r"
+local version = "1.1d"
 local link = "https://www.devrant.io/api/devrant/rants?app=3&sort=recent&skip=0"
 local headers = {["User-Agent"] = "ComputerCraft devRant Client " .. version}
  
@@ -53,10 +54,21 @@ if obj.success then
       print("[IMG]")
     end
    
-    if showScore then
-      print("++: ", obj.rants[i].score)
+    if showScore and showComments then
+      print("++: ", obj.rants[i].score, "   [C]: ", obj.rants[i].num_comments)
+    elseif showScore then
+      print("++: ", obj.rants[i].score, "   ")
+    elseif showComments then
+      print("[C]: ", obj.rants[i].num_comments, "   ")
     end
    
+    if obj.rants[i].edited then
+      local x, y = term.getCursorPos()
+      local width, height = term.getSize()
+      term.setCursorPos(width - 7, y -1)
+      print("[Edited]")
+      term.setCursorPos(x, y)
+    end
                
     if i ~= rantAmount then
       print("")
